@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H5P Content</title>
+    
+    <!-- H5P Standalone Requirements -->
+    <script src="main.bundle.js"></script>
+    <link rel="stylesheet" href="styles/h5p.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        #h5p-container {
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 400px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="h5p-container">
+        <div class="loading">Loading H5P Content...</div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const options = {
+                h5pJsonPath: '/content/your-h5p-content',
+                frameJs: '/frame.bundle.js',
+                frameCss: '/styles/h5p.css',
+                contentCss: '/styles/h5p-content.css',
+                librariesPath: '/libraries',
+                
+                // Additional options
+                preventH5PInit: false,
+                frame: true,
+                copyright: true,
+                icon: true,
+                fullScreen: true,
+                
+                // Callbacks
+                onInit: function() {
+                    console.log('H5P initialized');
+                    document.querySelector('.loading').style.display = 'none';
+                },
+                onError: function(err) {
+                    console.error('H5P initialization error:', err);
+                    document.querySelector('.loading').innerHTML = 'Error loading H5P content';
+                }
+            };
+
+            try {
+                new H5PStandalone.H5P(document.getElementById('h5p-container'), options);
+            } catch (err) {
+                console.error('H5P creation error:', err);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "h5p-content",
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "rimraf dist/*",
+    "copy:h5p": "copyfiles -u 3 \"node_modules/h5p-standalone/dist/**/*\" dist",
+    "copy:content": "copyfiles -u 1 \"content/**/*\" dist",
+    "build": "npm run clean && npm run copy:h5p && npm run copy:content && npm run copy:html",
+    "copy:html": "copyfiles index.html dist",
+    "start": "http-server dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "h5p-standalone": "^3.7.0"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "http-server": "^14.1.1",
+    "rimraf": "^6.0.1"
+  }
+}
